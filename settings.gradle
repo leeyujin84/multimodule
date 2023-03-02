@@ -1,0 +1,32 @@
+/*
+pluginManagement {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+*/
+
+
+rootProject.name = 'konabase'
+
+include 'konabase-core-common'
+project(':konabase-core-common').projectDir = file('konabase-core/konabase-core-common')
+//findProject(':konabase-core:konabase-core-common')?.name = 'konabase-core-common'
+
+include 'konabase-core-domain'
+project(':konabase-core-domain').projectDir = file('konabase-core/konabase-core-domain')
+//findProject(':konabase-core:konabase-core-domain')?.name = 'konabase-core-domain'
+
+include 'konabase-app-api'
+project(':konabase-app-api').projectDir = file('konabase-app/konabase-app-api')
+//findProject(':konabase-app:konabase-app-api')?.name = 'konabase-app-api'
+
+include 'konabase-app-mock'
+project(':konabase-app-mock').projectDir = file('konabase-app/konabase-app-mock')
+//findProject(':konabase-app-mock')?.name = 'konabase-app-mock'
+include 'konabase-infrastructure-shiftee'
+project(':konabase-infrastructure-shiftee').projectDir = file('konabase-infrastructure/konabase-infrastructure-shiftee')
+

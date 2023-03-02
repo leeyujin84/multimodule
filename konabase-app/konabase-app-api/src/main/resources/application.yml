@@ -1,0 +1,16 @@
+server:
+  port: 28080
+spring:
+  config:
+    import:
+      - optional:classpath:application-core-common.yml
+      - optional:classpath:application-core-domain.yml
+logger:
+  path: d:\logs
+  name: empty
+  level: DEBUG
+application:
+  component:
+    code: 991 #100이상으로~
+    name: EMPTY
+    profile: normal

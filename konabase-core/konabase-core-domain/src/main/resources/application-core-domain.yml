@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mysql://dev.hellohmg.com/batch_test?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    password: test!234
+    username: batch_test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+mybatis:
+  mapper-locations: mapper/**.xml
+  type-aliases-package: com.kona.konabase.core.domain.mapper

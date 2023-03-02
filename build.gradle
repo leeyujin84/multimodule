@@ -1,0 +1,108 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.7.5"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "org.ajoberstar.grgit" version "4.1.1"
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootJar.enabled = false
+
+ext {
+    git = org.ajoberstar.grgit.Grgit.open(dir: file('.'))
+}
+
+allprojects {
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: "org.ajoberstar.grgit"
+
+    repositories {
+        mavenCentral()
+    }
+
+    group = 'com.kona.konabase'
+    version = '1.0'
+
+    sourceCompatibility = '8'
+//    compileJava.options.encoding = 'UTF-8'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+}
+
+
+project(':konabase-core-common') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+/* build 정보 - Actuator */
+    task makeBuildInfoFile{
+        def infoFile = file("$projectDir/src/main/resources/application-build-info.properties") // 빌드 시 자동 생성
+        def properties = new Properties()
+        properties.setProperty('info.java.version', System.properties['java.version'])
+        properties.setProperty('info.git.revision', git.head().id)
+        properties.setProperty('info.git.hash', git.head().abbreviatedId)
+        properties.setProperty('info.git.message',  git.head().shortMessage)
+        properties.setProperty('info.git.branchName', git.branch.getCurrent().fullName)
+        properties.setProperty('info.git.commitDate', git.head().getDate().format('yyyy-MM-dd HH:mm:ss'))
+        properties.setProperty('info.build.date', (new Date()).format('yyyy-MM-dd HH:mm:ss'))
+        properties.setProperty('info.build.number', System.getenv( 'BUILD_NUMBER' )==null?"not Jenkins Build":System.getenv( 'BUILD_NUMBER' ).toString())
+        properties.store(infoFile.newWriter(), 'Build Information')
+    }
+}
+project(':konabase-core-domain') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+    dependencies {
+        implementation project(':konabase-core-common')
+    }
+}
+
+project(':konabase-app-api') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':konabase-core-common')
+        implementation project(':konabase-core-domain')
+        implementation project(':konabase-infrastructure-shiftee')
+    }
+}
+
+project(':konabase-app-mock') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':konabase-core-common')
+    }
+}
+
+project(':konabase-infrastructure-shiftee') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':konabase-core-common')
+    }
+}

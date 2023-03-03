@@ -7,6 +7,8 @@ public class RequestHeaderConstant {
 
   /** 요청 System ID */
   public static final String REQUESTER_ID = "x-requester-id";
+  public static final String EMPTY_REQUESTER_ID = "CLIENT";
+
 
   public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
 

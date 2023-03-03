@@ -30,3 +30,6 @@ project(':konabase-app-mock').projectDir = file('konabase-app/konabase-app-mock'
 include 'konabase-infrastructure-shiftee'
 project(':konabase-infrastructure-shiftee').projectDir = file('konabase-infrastructure/konabase-infrastructure-shiftee')
 
+include 'konabase-infrastructure-atlassian'
+project(':konabase-infrastructure-atlassian').projectDir = file('konabase-infrastructure/konabase-infrastructure-atlassian')
+

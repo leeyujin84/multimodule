@@ -95,10 +95,21 @@ project(':konabase-app-mock') {
 
     dependencies {
         implementation project(':konabase-core-common')
+        implementation project(':konabase-infrastructure-shiftee')
+        implementation project(':konabase-infrastructure-atlassian')
     }
 }
 
 project(':konabase-infrastructure-shiftee') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':konabase-core-common')
+    }
+}
+
+project(':konabase-infrastructure-atlassian') {
     bootJar { enabled = false }
     jar { enabled = true }
 

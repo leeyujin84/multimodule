@@ -8,7 +8,7 @@ spring:
 logger:
   path: d:\logs
   name: empty
-  level: DEBUG
+  level: INFO
 application:
   component:
     code: 991 #100이상으로~

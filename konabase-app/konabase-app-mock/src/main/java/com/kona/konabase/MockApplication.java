@@ -10,11 +10,11 @@ import javax.annotation.PreDestroy;
 
 @Slf4j
 @SpringBootApplication
-public class ApiApplication {
+public class MockApplication {
 
   public static void main(String[] args) {
     SpringApplication application = new SpringApplicationBuilder()
-        .sources(ApiApplication.class)
+        .sources(MockApplication.class)
         .listeners(new ApplicationPidFileWriter("./this.pid")) // stop.sh 사용
         .build();
     application.run(args);

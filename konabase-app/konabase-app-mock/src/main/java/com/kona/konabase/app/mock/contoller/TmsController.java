@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/tms/kakaoSend.do")
-@EnableFeignClients(clients = {ShifteeClient.class, AtlassianClient.class})
+//@EnableFeignClients(clients = {ShifteeClient.class, AtlassianClient.class})
 @RequiredArgsConstructor
 public class TmsController {
 

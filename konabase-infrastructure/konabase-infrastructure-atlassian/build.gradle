@@ -1,0 +1,5 @@
+
+dependencies {
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.6'
+    implementation 'org.projectlombok:lombok:1.18.18'
+}
